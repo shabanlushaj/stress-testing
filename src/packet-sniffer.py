@@ -1,3 +1,10 @@
+from Tkinter import *
+import Tkinter
+
+window = Tkinter.Tk()
+window.title("NIC - Packet sniffer")
+window.geometry("1000x750")
+
 ip_output = (
     str(i)
     + " IP "
@@ -58,3 +65,18 @@ icmp_output = (
     + " Sequence Number: "
     + str(icmp_seqnum)
 )
+
+lbl = Tkinter.Label(window, textvariable=label)
+lbl.pack()
+startButton = Tkinter.Button(window, text="START", command=start)
+stopButton = Tkinter.Button(window, text="STOP", command=stop)
+startButton.pack()
+stopButton.pack()
+scrollbar = Scrollbar(window)
+scrollbar.pack(side=RIGHT, fill=Y)
+listbox = Listbox(window, bd=5, selectmode=BROWSE, relief=SUNKEN)
+listbox.pack(fill=BOTH, expand=TRUE)
+listbox.config(yscrollcommand=scrollbar.set)
+scrollbar.config(command=listbox.yview)
+
+window.mainloop()
