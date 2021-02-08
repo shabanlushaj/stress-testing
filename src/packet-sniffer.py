@@ -4,9 +4,16 @@ import time
 import socket
 import struct
 
+Public network interface
+HOST = socket.gethostbyname(socket.gethostname())
+
 window = Tkinter.Tk()
 window.title("NIC - Packet sniffer")
 window.geometry("1000x750")
+
+s = socket.socket(socket.AF_INET, socket.SOCK_RAW)
+s.bind((HOST, 0))
+s.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.htons(0x0003))
 
