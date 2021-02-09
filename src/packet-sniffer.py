@@ -1,21 +1,19 @@
-from Tkinter import *
-import Tkinter
+from tkinter import *
+import tkinter
 import time
 import socket
 import struct
+import threading
 
-Public network interface
-HOST = socket.gethostbyname(socket.gethostname())
-
-window = Tkinter.Tk()
-window.title("NIC - Packet sniffer")
+window = tkinter.Tk()
+window.title("Packet Sniffer")
 window.geometry("1000x750")
 
+HOST = socket.gethostbyname(socket.gethostname())
 s = socket.socket(socket.AF_INET, socket.SOCK_RAW)
 s.bind((HOST, 0))
+s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 s.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
-
-s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.htons(0x0003))
 
 i = 0
 running = BooleanVar()
@@ -28,6 +26,8 @@ def start():
     global i
     label.set("SNIFFING...")
     if running.get():
+        print("hello world")
+        # receive a package
         packet = s.recvfrom(65565)
 
         packet = packet[0]
@@ -100,7 +100,6 @@ def start():
             data = packet[h_size:]
 
             if dest_port == 80:
-                # unpack http
                 http = packet[iph_length + 20 : len(packet)]
                 print(http)
                 listbox.insert(END, str(i) + " HTTP " + tcp_output)
@@ -138,7 +137,6 @@ def start():
             icmp_checksum = icmph[2]
             icmp_identifier = icmph[3]
             icmp_seqnum = icmph[4]
-            # print("ICMP")
             icmp_output = (
                 str(i)
                 + " ICMP "
@@ -171,10 +169,10 @@ def stop():
     window.update_idletasks()
 
 
-lbl = Tkinter.Label(window, textvariable=label)
+lbl = tkinter.Label(window, textvariable=label)
 lbl.pack()
-startButton = Tkinter.Button(window, text="START", command=start)
-stopButton = Tkinter.Button(window, text="STOP", command=stop)
+startButton = tkinter.Button(window, text="START", command=start)
+stopButton = tkinter.Button(window, text="STOP", command=stop)
 startButton.pack()
 stopButton.pack()
 scrollbar = Scrollbar(window)
