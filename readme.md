@@ -8,6 +8,13 @@ Zhvillimi i aplikacionit qe mundeson pergjimin e kanalit te komunikimit (ose NIC
 
 </br>
 
+## Basic functionality
+
+The program uses a raw socket to catch Ethernet frames and the reads the content inside the said frames to determine the transport, network and application layer protocols encapsulated in it. It is able to read Link Layer – Ethernet Frames and ARP packets, Network Layer – IP and ICMP packets, Transport Layer – TCP and UDP and Application Layer – HTTP.
+The code uses the information on the header of the previous layer to determine what the upper layer protocols are. The packets are then unpacked using the string format for their header and the information displayed as a string.
+
+</br>
+
 ## REQUIREMENTS
 
 ***Kali linux***
@@ -74,3 +81,5 @@ For protocol number **17** : *UDP*
 ## Results
 
 ## Info
+
+Since windows does not allow access to Ethernet frames, the code can be run only on Linux subsystems.
