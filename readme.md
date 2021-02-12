@@ -21,11 +21,27 @@ The code uses the information on the header of the previous layer to determine w
 
 ***Python version > 2.7***
 
+Libraries:
+
+- tkinter
+- time
+- socket
+- struct
+- threading
+
+Python by default comes shipped with these libraries, so there is no need for installation.
+
 </br>
 
-## Installation
+## Installation and usage
 
-Open the terminal in the source directory and run `packet-sniffer.py`.
+Open the terminal in the main directory.
+
+Run application:
+
+`python main.py`.
+
+Based on the operating system, the proper application will be open.
 
 This procedure will start a GUI application with 2 buttons. Start and Stop.
 
@@ -77,10 +93,9 @@ For protocol number **17** : *UDP*
 - Checksum
 
 ## Examples
-![alt text](https://raw.githubusercontent.com/shabanlushaj/nic-sniffing/master/src/test_1.png?token=AN5CCWNOJNWJUMT2NWGGWMLAFQL56)
 
-## Results
+![alt text](https://raw.githubusercontent.com/shabanlushaj/nic-sniffing/master/src/test_1.png?token=AN5CCWNOJNWJUMT2NWGGWMLAFQL56)
 
 ## Info
 
-Since windows does not allow access to Ethernet frames, the code can be run only on Linux subsystems.
+Since windows does not allow access to all Ethernet frames, the windows application will show only UDP protocol. On Linux subsystems, output will frame all protocols.
